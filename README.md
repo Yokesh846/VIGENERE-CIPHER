@@ -30,7 +30,94 @@ STEP-8: Repeat the above steps to generate the entire cipher text.
 
 
 ## PROGRAM
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 
+void encipher();
+void decipher();
+
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n1. Encrypt Text");
+        printf("\t2. Decrypt Text");
+        printf("\t3. Exit");
+        printf("\n\nEnter Your Choice: ");
+        scanf("%d", &choice);
+
+        if (choice == 3) {
+            exit(0);
+        } else if (choice == 1) {
+            encipher();
+        } else if (choice == 2) {
+            decipher();
+        } else {
+            printf("Please Enter Valid Option.\n");
+        }
+    }
+
+    return 0;
+}
+
+void encipher() {
+    unsigned int i, j;
+    char input[50], key[10];
+
+    printf("\n\nEnter Plain Text: ");
+    scanf("%s", input);
+
+    printf("\nEnter Key Value: ");
+    scanf("%s", key);
+
+    printf("\nResultant Cipher Text: ");
+    
+    for (i = 0, j = 0; i < strlen(input); i++, j++) {
+        if (j >= strlen(key)) {
+            j = 0;
+        }
+        
+        printf("%c", 65 + (((toupper(input[i]) - 65) + (toupper(key[j]) - 65)) % 26));
+    }
+    
+    printf("\n");
+}
+
+void decipher() {
+    unsigned int i, j;
+    char input[50], key[50];
+    int value;
+
+    printf("\n\nEnter Cipher Text: ");
+    scanf("%s", input);
+
+    printf("\n\nEnter the Key Value: ");
+    scanf("%s", key);
+
+    printf("\nResultant Decrypted Text: ");
+
+    for (i = 0, j = 0; i < strlen(input); i++, j++) {
+        if (j >= strlen(key)) {
+            j = 0;
+        }
+
+        value = (toupper(input[i]) - 65) - (toupper(key[j]) - 65);
+
+        if (value < 0) {
+            value += 26;  // Ensure the result is positive
+        }
+
+        printf("%c", 65 + (value % 26));
+    }
+
+    printf("\n");
+}
+```
 ## OUTPUT
+![Screenshot 2025-04-07 082937](https://github.com/user-attachments/assets/057912dd-84b7-4b3e-bf7c-ff3297c58efa)
 
 ## RESULT
+Thus the C program for Vigenere Cipher is implemented successfully.
