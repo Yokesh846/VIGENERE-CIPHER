@@ -30,7 +30,55 @@ STEP-8: Repeat the above steps to generate the entire cipher text.
 
 
 ## PROGRAM
+Reg no: 212224040734
+Yokeshwaran A
 
+def vigenere_encrypt(text, key):
+    encrypted_text = []
+    key_length = len(key)
+    
+    for i, char in enumerate(text):
+        if 'A' <= char <= 'Z':
+            shift = ord(key[i % key_length].upper()) - ord('A')
+            encrypted_text.append(chr((ord(char) - ord('A') + shift) % 26 + ord('A')))
+        elif 'a' <= char <= 'z':
+            shift = ord(key[i % key_length].lower()) - ord('a')
+            encrypted_text.append(chr((ord(char) - ord('a') + shift) % 26 + ord('a')))
+        else:
+            encrypted_text.append(char)  # Keep non-alphabetic characters unchanged
+    
+    return "".join(encrypted_text)
+
+def vigenere_decrypt(text, key):
+    decrypted_text = []
+    key_length = len(key)
+    
+    for i, char in enumerate(text):
+        if 'A' <= char <= 'Z':
+            shift = ord(key[i % key_length].upper()) - ord('A')
+            decrypted_text.append(chr((ord(char) - ord('A') - shift + 26) % 26 + ord('A')))
+        elif 'a' <= char <= 'z':
+            shift = ord(key[i % key_length].lower()) - ord('a')
+            decrypted_text.append(chr((ord(char) - ord('a') - shift + 26) % 26 + ord('a')))
+        else:
+            decrypted_text.append(char)  
+    
+    return "".join(decrypted_text)
+
+key = "VAR"
+message = "saveethaengineeringcollege"
+
+print("Simulating Vigenère Cipher:")
+print("Original Message:", message)
+print("Key:", key)
+
+encrypted_message = vigenere_encrypt(message, key)
+print("Encrypted Message:", encrypted_message)
+
+decrypted_message = vigenere_decrypt(encrypted_message, key)
+print("Decrypted Message:", decrypted_message)
 ## OUTPUT
+![image](https://github.com/user-attachments/assets/67614aa6-0499-4b57-9641-54de3fdc49dd)
 
 ## RESULT
+The program is executed successfully
